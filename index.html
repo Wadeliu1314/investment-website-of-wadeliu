@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>兔斯基的投资网站</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; }
+.nav { background: #1e293b; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+.nav h1 { font-size: 20px; color: #3b82f6; }
+.nav a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 14px; }
+.nav a:hover { color: #3b82f6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.stat-card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
+.stat-card .num { font-size: 32px; font-weight: 700; }
+.stat-card .label { font-size: 14px; color: #94a3b8; margin-top: 4px; }
+.green { color: #22c55e; }
+.blue { color: #3b82f6; }
+.yellow { color: #eab308; }
+.red { color: #ef4444; }
+h2 { font-size: 18px; margin-bottom: 16px; }
+.btn { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+.btn:hover { background: #2563eb; }
+.btn-outline { background: transparent; border: 1px solid #3b82f6; color: #3b82f6; }
+.btn-outline:hover { background: #3b82f6; color: white; }
+.card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; margin-bottom: 16px; }
+.card h3 { font-size: 16px; margin-bottom: 8px; }
+.card p { color: #94a3b8; font-size: 14px; line-height: 1.6; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.badge-green { background: #166534; color: #22c55e; }
+.badge-red { background: #7f1d1d; color: #ef4444; }
+.badge-yellow { background: #713f12; color: #eab308; }
+.score-bar { height: 8px; background: #334155; border-radius: 4px; overflow: hidden; margin-top: 8px; }
+.score-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #334155; font-size: 14px; }
+th { color: #94a3b8; font-weight: 600; }
+.dim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+@media (max-width: 768px) { .dim-grid { grid-template-columns: repeat(2, 1fr); } }
+.dim-item { background: #0f172a; border-radius: 8px; padding: 16px; text-align: center; border: 1px solid #334155; }
+.dim-item .score { font-size: 28px; font-weight: 700; }
+.dim-item .name { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+.dim-item .weight { font-size: 11px; color: #64748b; margin-top: 2px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 14px; color: #94a3b8; margin-bottom: 6px; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; font-size: 14px; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #3b82f6; }
+.slider-group { margin-bottom: 12px; }
+.slider-group .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.slider-group .name { font-size: 13px; }
+.slider-group .val { font-size: 14px; font-weight: 700; }
+.slider-group input[type=range] { width: 100%; accent-color: #3b82f6; }
+.section { display: none; }
+.section.active { display: block; }
+.tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.tab { padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; background: #1e293b; border: 1px solid #334155; color: #94a3b8; }
+.tab.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+.report-header { background: linear-gradient(135deg, #1e3a5f, #0f172a); padding: 32px; border-radius: 12px; margin-bottom: 24px; }
+.report-header h1 { font-size: 24px; margin-bottom: 8px; }
+.report-header p { color: #94a3b8; }
+.empty { text-align: center; padding: 60px 20px; color: #64748b; }
+.empty p { font-size: 16px; margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <h1>🐻 兔斯基投资</h1>
+  <div>
+    <a href="#" onclick="show('dashboard')">首页</a>
+    <a href="#" onclick="show('projects')">项目库</a>
+    <a href="#" onclick="show('new-project')">新建评估</a>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Dashboard -->
+  <div id="dashboard" class="section active">
+    <h2>📊 投资仪表盘</h2>
+    <div class="stats" id="stats"></div>
+    <div class="grid-2">
+      <div>
+        <h2>📋 最近项目</h2>
+        <div id="recent-projects"></div>
+      </div>
+      <div>
+        <h2>📈 投资分布</h2>
+        <div class="card" id="distribution">
+          <p style="color:#64748b">暂无数据</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div id="projects" class="section">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2>📁 项目库</h2>
+      <div>
+        <input type="text" id="search-input" placeholder="搜索项目..." oninput="renderProjects()" style="padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:14px;width:200px;">
+        <select id="stage-filter" onchange="renderProjects()" style="padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:14px;margin-left:8px;">
+          <option value="">全部阶段</option>
+          <option value="种子轮">种子轮</option>
+          <option value="天使轮">天使轮</option>
+          <option value="A轮">A轮</option>
+          <option value="B轮">B轮</option>
+          <option value="C轮">C轮</option>
+          <option value="战略融资">战略融资</option>
+        </select>
+      </div>
+    </div>
+    <div id="project-list"></div>
+  </div>
+
+  <!-- New Project -->
+  <div id="new-project" class="section">
+    <h2>📝 新建项目评估</h2>
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h3>基本信息</h3>
+          <div class="form-group"><label>项目名称</label><input type="text" id="p-name" placeholder="请输入项目名称"></div>
+          <div class="form-group"><label>公司名称</label><input type="text" id="p-company" placeholder="请输入公司名称"></div>
+          <div class="form-group"><label>行业</label>
+            <select id="p-industry">
+              <option value="AI芯片">AI芯片</option>
+              <option value="大模型">大模型</option>
+              <option value="AI应用">AI应用</option>
+              <option value="机器人">机器人</option>
+              <option value="太空AI">太空AI</option>
+              <option value="卫星互联网">卫星互联网</option>
+              <option value="量子计算">量子计算</option>
+              <option value="商业航天">商业航天</option>
+              <option value="新能源">新能源</option>
+              <option value="半导体">半导体</option>
+            </select>
+          </div>
+          <div class="form-group"><label>融资阶段</label>
+            <select id="p-stage">
+              <option value="种子轮">种子轮</option>
+              <option value="天使轮">天使轮</option>
+              <option value="Pre-A">Pre-A</option>
+              <option value="A轮">A轮</option>
+              <option value="B轮">B轮</option>
+              <option value="C轮">C轮</option>
+              <option value="D轮">D轮</option>
+              <option value="战略融资">战略融资</option>
+            </select>
+          </div>
+          <div class="form-group"><label>备注</label><textarea id="p-notes" rows="3" placeholder="项目备注..."></textarea></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>8维度评分</h3>
+          <div id="dimension-sliders"></div>
+          <div style="margin-top:16px;padding:16px;background:#0f172a;border-radius:8px;text-align:center;">
+            <div style="font-size:14px;color:#94a3b8;">加权总分（百分制）</div>
+            <div id="total-score" style="font-size:48px;font-weight:700;margin:8px 0;">0</div>
+            <div id="investment-advice" style="font-size:16px;font-weight:600;"></div>
+          </div>
+          <button class="btn" style="width:100%;margin-top:16px;padding:12px;" onclick="saveProject()">💾 保存项目</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DIMENSIONS = [
+  { id: 'technology', name: '技术维度', weight: 16 },
+  { id: 'product', name: '产品维度', weight: 15 },
+  { id: 'market', name: '市场维度', weight: 15 },
+  { id: 'competition', name: '竞争维度', weight: 12 },
+  { id: 'team', name: '团队维度', weight: 12 },
+  { id: 'organization', name: '组织维度', weight: 10 },
+  { id: 'financing', name: '融资周期', weight: 10 },
+  { id: 'exit', name: '退出路径', weight: 10 }
+];
+
+const INDICATORS = {
+  technology: ['技术成熟度','技术创新度','技术壁垒强度','技术替代风险'],
+  product: ['产品市场契合度','产品竞争力','产品迭代能力','商业化潜力'],
+  market: ['市场规模与增长','市场成熟度','市场政策支持','市场进入壁垒'],
+  competition: ['竞争格局','竞争对手实力','差异化优势','市场份额潜力'],
+  team: ['创始人背景','团队完整性','团队执行力','学习能力'],
+  organization: ['组织结构','企业文化','人才吸引','管理体系'],
+  financing: ['融资周期','资本耐心度','融资稳定性','烧钱率'],
+  exit: ['IPO可能性','并购可能性','二级市场流动性','基金匹配度']
+};
+
+let projects = JSON.parse(localStorage.getItem('tuqii_projects') || '[]');
+let currentScores = {};
+
+function init() {
+  DIMENSIONS.forEach(d => { currentScores[d.id] = 5; });
+  renderSliders();
+  renderDashboard();
+  renderProjects();
+}
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'dashboard') renderDashboard();
+  if (id === 'projects') renderProjects();
+  if (id === 'new-project') { renderSliders(); updateScore(); }
+}
+
+function renderSliders() {
+  const el = document.getElementById('dimension-sliders');
+  el.innerHTML = DIMENSIONS.map(d => `
+    <div class="slider-group" style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #334155;">
+      <div class="header"><span class="name">${d.name}</span><span class="val" style="color:#3b82f6;" id="val-${d.id}">${currentScores[d.id]}</span></div>
+      <input type="range" min="1" max="10" value="${currentScores[d.id]}" oninput="onScore('${d.id}', this.value)">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:8px;">
+        ${INDICATORS[d.id].map(ind => `<div style="font-size:11px;color:#64748b;">• ${ind}</div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function onScore(dimId, val) {
+  currentScores[dimId] = parseInt(val);
+  document.getElementById('val-' + dimId).textContent = val;
+  updateScore();
+}
+
+function updateScore() {
+  let total = 0;
+  DIMENSIONS.forEach(d => { total += currentScores[d.id] * d.weight; });
+  const pct = total; // 0-100
+  const el = document.getElementById('total-score');
+  const adv = document.getElementById('investment-advice');
+  el.textContent = pct;
+  el.style.color = pct >= 70 ? '#22c55e' : '#ef4444';
+  if (pct >= 90) { adv.textContent = '🟢 强烈推荐投资'; adv.style.color = '#22c55e'; }
+  else if (pct >= 70) { adv.textContent = '🟡 推荐投资'; adv.style.color = '#eab308'; }
+  else { adv.textContent = '🔴 不建议投资'; adv.style.color = '#ef4444'; }
+}
+
+function saveProject() {
+  const name = document.getElementById('p-name').value.trim();
+  const company = document.getElementById('p-company').value.trim();
+  if (!name) { alert('请输入项目名称'); return; }
+  let total = 0;
+  DIMENSIONS.forEach(d => { total += currentScores[d.id] * d.weight; });
+  const advice = total >= 90 ? '强烈推荐投资' : total >= 70 ? '推荐投资' : '不建议投资';
+  const project = {
+    id: Date.now().toString(),
+    name, company,
+    industry: document.getElementById('p-industry').value,
+    stage: document.getElementById('p-stage').value,
+    scores: { ...currentScores },
+    totalScore: total,
+    advice,
+    notes: document.getElementById('p-notes').value,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+  projects.unshift(project);
+  localStorage.setItem('tuqii_projects', JSON.stringify(projects));
+  alert('✅ 项目已保存！');
+  // Reset form
+  document.getElementById('p-name').value = '';
+  document.getElementById('p-company').value = '';
+  document.getElementById('p-notes').value = '';
+  DIMENSIONS.forEach(d => { currentScores[d.id] = 5; });
+  renderSliders();
+  updateScore();
+  show('dashboard');
+}
+
+function renderDashboard() {
+  const total = projects.length;
+  const invested = projects.filter(p => p.totalScore >= 70).length;
+  const rejected = projects.filter(p => p.totalScore < 70).length;
+  const avgScore = total > 0 ? Math.round(projects.reduce((s, p) => s + p.totalScore, 0) / total) : 0;
+  
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-card"><div class="num blue">${total}</div><div class="label">总项目数</div></div>
+    <div class="stat-card"><div class="num green">${invested}</div><div class="label">推荐投资</div></div>
+    <div class="stat-card"><div class="num red">${rejected}</div><div class="label">不建议投资</div></div>
+    <div class="stat-card"><div class="num yellow">${avgScore}</div><div class="label">平均分数</div></div>
+  `;
+
+  const recent = document.getElementById('recent-projects');
+  if (projects.length === 0) {
+    recent.innerHTML = '<div class="empty"><p>暂无项目</p><p style="font-size:13px;">点击"新建评估"开始</p></div>';
+  } else {
+    recent.innerHTML = projects.slice(0, 5).map(p => `
+      <div class="card" style="cursor:pointer;" onclick="viewProject('${p.id}')">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div><h3>${p.name}</h3><p style="font-size:12px;color:#64748b;margin-top:2px;">${p.company} · ${p.industry} · ${p.stage}</p></div>
+          <div style="text-align:right;"><div style="font-size:24px;font-weight:700;color:${p.totalScore >= 70 ? '#22c55e' : '#ef4444'}">${p.totalScore}</div>
+          <span class="badge ${p.totalScore >= 90 ? 'badge-green' : p.totalScore >= 70 ? 'badge-yellow' : 'badge-red'}">${p.advice}</span></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Distribution
+  const dist = document.getElementById('distribution');
+  if (total > 0) {
+    const industries = {};
+    projects.forEach(p => { industries[p.industry] = (industries[p.industry] || 0) + 1; });
+    dist.innerHTML = Object.entries(industries).sort((a,b) => b[1] - a[1]).map(([ind, count]) => `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:14px;">${ind}</span>
+        <span style="font-size:14px;font-weight:600;">${count}</span>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width:${count/total*100}%;background:#3b82f6;"></div></div>
+    `).join('');
+  }
+}
+
+function renderProjects() {
+  const search = document.getElementById('search-input').value.toLowerCase();
+  const stage = document.getElementById('stage-filter').value;
+  let filtered = projects.filter(p => {
+    const matchSearch = p.name.toLowerCase().includes(search) || p.company.toLowerCase().includes(search);
+    const matchStage = !stage || p.stage === stage;
+    return matchSearch && matchStage;
+  });
+
+  const el = document.getElementById('project-list');
+  if (filtered.length === 0) {
+    el.innerHTML = '<div class="empty"><p>暂无匹配项目</p></div>';
+    return;
+  }
+  el.innerHTML = `
+    <table>
+      <thead><tr><th>项目</th><th>行业</th><th>阶段</th><th>分数</th><th>建议</th></tr></thead>
+      <tbody>
+        ${filtered.map(p => `
+          <tr style="cursor:pointer;" onclick="viewProject('${p.id}')">
+            <td><strong>${p.name}</strong><br><span style="font-size:12px;color:#64748b;">${p.company}</span></td>
+            <td>${p.industry}</td>
+            <td>${p.stage}</td>
+            <td style="font-weight:700;color:${p.totalScore >= 70 ? '#22c55e' : '#ef4444'}">${p.totalScore}</td>
+            <td><span class="badge ${p.totalScore >= 90 ? 'badge-green' : p.totalScore >= 70 ? 'badge-yellow' : 'badge-red'}">${p.advice}</span></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function viewProject(id) {
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  const colors = ['#ef4444','#f97316','#eab308','#22c55e','#3b82f6','#8b5cf6','#ec4899','#6366f1'];
+  
+  show('dashboard');
+  document.querySelector('.container').innerHTML = `
+    <div style="margin-bottom:16px;">
+      <a href="#" onclick="init(); return false;" style="color:#3b82f6;font-size:14px;">← 返回首页</a>
+    </div>
+    <div class="report-header">
+      <h1>${p.name}</h1>
+      <p>${p.company} · ${p.industry} · ${p.stage} · ${new Date(p.createdAt).toLocaleDateString('zh-CN')}</p>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="num" style="color:${p.totalScore >= 70 ? '#22c55e' : '#ef4444'};font-size:48px;">${p.totalScore}</div><div class="label">综合评分（百分制）</div></div>
+      <div class="stat-card"><span class="badge ${p.totalScore >= 90 ? 'badge-green' : p.totalScore >= 70 ? 'badge-yellow' : 'badge-red'}" style="font-size:16px;padding:8px 16px;">${p.advice}</span></div>
+    </div>
+    <h2>📊 8维度评分详情</h2>
+    <div class="dim-grid">
+      ${DIMENSIONS.map((d, i) => {
+        const score = p.scores[d.id] || 5;
+        const weighted = score * d.weight;
+        return `
+          <div class="dim-item">
+            <div class="score" style="color:${colors[i]}">${score}</div>
+            <div class="name">${d.name}</div>
+            <div class="weight">权重${d.weight}% · 加权${weighted}</div>
+            <div class="score-bar" style="margin-top:8px;"><div class="score-fill" style="width:${score*10}%;background:${colors[i]};"></div></div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    ${p.notes ? `<div class="card" style="margin-top:24px;"><h3>📝 备注</h3><p>${p.notes}</p></div>` : ''}
+    <div style="margin-top:16px;display:flex;gap:8px;">
+      <button class="btn" onclick="if(confirm('确定删除此项目？')){projects=projects.filter(x=>x.id!=='${p.id}');localStorage.setItem('tuqii_projects',JSON.stringify(projects));init();}">🗑️ 删除项目</button>
+      <button class="btn btn-outline" onclick="exportProject('${p.id}')">📤 导出</button>
+    </div>
+  `;
+}
+
+function exportProject(id) {
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  const text = `# ${p.name} - 投资评估报告\n\n## 基本信息\n- 公司：${p.company}\n- 行业：${p.industry}\n- 阶段：${p.stage}\n- 日期：${new Date(p.createdAt).toLocaleDateString('zh-CN')}\n\n## 综合评分：${p.totalScore}/100\n## 投资建议：${p.advice}\n\n## 8维度评分\n${DIMENSIONS.map(d => `- ${d.name}（权重${d.weight}%）：${p.scores[d.id]}/10`).join('\n')}\n\n## 备注\n${p.notes || '无'}\n`;
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${p.name}_评估报告.txt`;
+  a.click();
+}
+
+init();
+</script>
+
+</body>
+</html>
