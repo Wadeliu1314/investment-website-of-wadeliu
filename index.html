@@ -9,12 +9,12 @@
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; }
 .nav { background: #1e293b; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
 .nav h1 { font-size: 20px; color: #3b82f6; }
-.nav a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 14px; }
+.nav a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 14px; cursor: pointer; }
 .nav a:hover { color: #3b82f6; }
 .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
 .stat-card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; }
-.stat-card .num { font-size: 32px; font-weight: 700; }
+.stat-card .num { font-size: 28px; font-weight: 700; }
 .stat-card .label { font-size: 14px; color: #94a3b8; margin-top: 4px; }
 .green { color: #22c55e; }
 .blue { color: #3b82f6; }
@@ -24,7 +24,6 @@ h2 { font-size: 18px; margin-bottom: 16px; }
 .btn { background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; }
 .btn:hover { background: #2563eb; }
 .btn-outline { background: transparent; border: 1px solid #3b82f6; color: #3b82f6; }
-.btn-outline:hover { background: #3b82f6; color: white; }
 .card { background: #1e293b; border-radius: 12px; padding: 20px; border: 1px solid #334155; margin-bottom: 16px; }
 .card h3 { font-size: 16px; margin-bottom: 8px; }
 .card p { color: #94a3b8; font-size: 14px; line-height: 1.6; }
@@ -34,36 +33,41 @@ h2 { font-size: 18px; margin-bottom: 16px; }
 .badge-green { background: #166534; color: #22c55e; }
 .badge-red { background: #7f1d1d; color: #ef4444; }
 .badge-yellow { background: #713f12; color: #eab308; }
-.score-bar { height: 8px; background: #334155; border-radius: 4px; overflow: hidden; margin-top: 8px; }
-.score-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #334155; font-size: 14px; }
 th { color: #94a3b8; font-weight: 600; }
-.dim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
-@media (max-width: 768px) { .dim-grid { grid-template-columns: repeat(2, 1fr); } }
-.dim-item { background: #0f172a; border-radius: 8px; padding: 16px; text-align: center; border: 1px solid #334155; }
-.dim-item .score { font-size: 28px; font-weight: 700; }
-.dim-item .name { font-size: 12px; color: #94a3b8; margin-top: 4px; }
-.dim-item .weight { font-size: 11px; color: #64748b; margin-top: 2px; }
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-size: 14px; color: #94a3b8; margin-bottom: 6px; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; font-size: 14px; }
 .form-group input:focus, .form-group select:focus { outline: none; border-color: #3b82f6; }
-.slider-group { margin-bottom: 12px; }
-.slider-group .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-.slider-group .name { font-size: 13px; }
-.slider-group .val { font-size: 14px; font-weight: 700; }
-.slider-group input[type=range] { width: 100%; accent-color: #3b82f6; }
 .section { display: none; }
 .section.active { display: block; }
-.tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-.tab { padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; background: #1e293b; border: 1px solid #334155; color: #94a3b8; }
-.tab.active { background: #3b82f6; color: white; border-color: #3b82f6; }
-.report-header { background: linear-gradient(135deg, #1e3a5f, #0f172a); padding: 32px; border-radius: 12px; margin-bottom: 24px; }
-.report-header h1 { font-size: 24px; margin-bottom: 8px; }
-.report-header p { color: #94a3b8; }
 .empty { text-align: center; padding: 60px 20px; color: #64748b; }
 .empty p { font-size: 16px; margin-top: 12px; }
+.dim-section { margin-bottom: 12px; padding: 14px; background: #0f172a; border-radius: 8px; border: 1px solid #334155; }
+.dim-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+.dim-title { font-size: 14px; font-weight: 600; }
+.dim-total { font-size: 14px; font-weight: 700; color: #3b82f6; }
+.dim-indicators { display: none; padding: 12px 0 0 0; margin-top: 12px; border-top: 1px solid #334155; }
+.dim-indicators.open { display: block; }
+.indicator-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.indicator-name { font-size: 12px; color: #94a3b8; flex: 1; }
+.indicator-score { width: 36px; text-align: center; font-weight: 600; color: #3b82f6; }
+.indicator-slider { flex: 2; }
+.indicator-slider input { width: 100%; accent-color: #3b82f6; }
+.indicator-desc { font-size: 11px; color: #64748b; margin-bottom: 8px; }
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #22c55e; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 1000; opacity: 0; transition: opacity 0.3s; }
+.toast.show { opacity: 1; }
+.toast.error { background: #ef4444; }
+.compare-grid { display: grid; gap: 12px; }
+.compare-card { background: #1e293b; border-radius: 12px; padding: 16px; border: 2px solid #334155; }
+.compare-card.winner { border-color: #22c55e; }
+.compare-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #334155; }
+.compare-row:last-child { border-bottom: none; }
+.compare-label { color: #94a3b8; font-size: 13px; }
+.compare-value { font-weight: 600; font-size: 13px; }
+.compare-select-wrap { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.compare-select-wrap select { padding: 8px 12px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #e2e8f0; font-size: 13px; min-width: 150px; }
 </style>
 </head>
 <body>
@@ -73,12 +77,14 @@ th { color: #94a3b8; font-weight: 600; }
   <div>
     <a href="#" onclick="show('dashboard')">首页</a>
     <a href="#" onclick="show('projects')">项目库</a>
+    <a href="#" onclick="show('compare')">项目对比</a>
     <a href="#" onclick="show('new-project')">新建评估</a>
   </div>
 </div>
 
+<div id="toast" class="toast"></div>
+
 <div class="container">
-  <!-- Dashboard -->
   <div id="dashboard" class="section active">
     <h2>📊 投资仪表盘</h2>
     <div class="stats" id="stats"></div>
@@ -88,27 +94,26 @@ th { color: #94a3b8; font-weight: 600; }
         <div id="recent-projects"></div>
       </div>
       <div>
-        <h2>📈 投资分布</h2>
-        <div class="card" id="distribution">
-          <p style="color:#64748b">暂无数据</p>
-        </div>
+        <h2>📈 行业分布</h2>
+        <div class="card" id="distribution"><p style="color:#64748b">暂无数据</p></div>
       </div>
     </div>
   </div>
 
-  <!-- Projects -->
   <div id="projects" class="section">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-      <h2>📁 项目库</h2>
-      <div>
-        <input type="text" id="search-input" placeholder="搜索项目..." oninput="renderProjects()" style="padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:14px;width:200px;">
-        <select id="stage-filter" onchange="renderProjects()" style="padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:14px;margin-left:8px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+      <h2>📁 项目库 (<span id="project-count">0</span>)</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <input type="text" id="search-input" placeholder="搜索..." oninput="renderProjects()" style="padding:8px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:14px;width:140px;">
+        <select id="stage-filter" onchange="renderProjects()" style="padding:8px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:14px;">
           <option value="">全部阶段</option>
+          <option value="概念阶段">概念阶段</option>
           <option value="种子轮">种子轮</option>
           <option value="天使轮">天使轮</option>
+          <option value="Pre-A">Pre-A</option>
           <option value="A轮">A轮</option>
           <option value="B轮">B轮</option>
-          <option value="C轮">C轮</option>
+          <option value="C轮及以上">C轮及以上</option>
           <option value="战略融资">战略融资</option>
         </select>
       </div>
@@ -116,48 +121,60 @@ th { color: #94a3b8; font-weight: 600; }
     <div id="project-list"></div>
   </div>
 
-  <!-- New Project -->
+  <div id="compare" class="section">
+    <h2>📊 项目对比分析</h2>
+    <div class="compare-select-wrap">
+      <select id="c1" onchange="renderCompare()"><option value="">选择项目1</option></select>
+      <select id="c2" onchange="renderCompare()"><option value="">选择项目2</option></select>
+      <select id="c3" onchange="renderCompare()"><option value="">选择项目3</option></select>
+    </div>
+    <div id="compare-result"></div>
+  </div>
+
   <div id="new-project" class="section">
     <h2>📝 新建项目评估</h2>
     <div class="grid-2">
       <div>
         <div class="card">
           <h3>基本信息</h3>
-          <div class="form-group"><label>项目名称</label><input type="text" id="p-name" placeholder="请输入项目名称"></div>
+          <div class="form-group"><label>项目名称 *</label><input type="text" id="p-name" placeholder="请输入项目名称"></div>
           <div class="form-group"><label>公司名称</label><input type="text" id="p-company" placeholder="请输入公司名称"></div>
           <div class="form-group"><label>行业</label>
             <select id="p-industry">
               <option value="AI芯片">AI芯片</option>
               <option value="大模型">大模型</option>
               <option value="AI应用">AI应用</option>
-              <option value="机器人">机器人</option>
-              <option value="太空AI">太空AI</option>
+              <option value="机器人">机器人/具身智能</option>
+              <option value="太空AI">太空AI算力</option>
               <option value="卫星互联网">卫星互联网</option>
               <option value="量子计算">量子计算</option>
               <option value="商业航天">商业航天</option>
-              <option value="新能源">新能源</option>
+              <option value="新能源">新能源/储能</option>
               <option value="半导体">半导体</option>
+              <option value="其他">其他</option>
             </select>
           </div>
           <div class="form-group"><label>融资阶段</label>
             <select id="p-stage">
+              <option value="概念阶段">概念阶段</option>
               <option value="种子轮">种子轮</option>
               <option value="天使轮">天使轮</option>
               <option value="Pre-A">Pre-A</option>
               <option value="A轮">A轮</option>
               <option value="B轮">B轮</option>
-              <option value="C轮">C轮</option>
-              <option value="D轮">D轮</option>
+              <option value="C轮及以上">C轮及以上</option>
               <option value="战略融资">战略融资</option>
             </select>
           </div>
-          <div class="form-group"><label>备注</label><textarea id="p-notes" rows="3" placeholder="项目备注..."></textarea></div>
+          <div class="form-group"><label>项目简介</label><textarea id="p-desc" rows="3" placeholder="一句话描述项目..."></textarea></div>
+          <div class="form-group"><label>备注</label><textarea id="p-notes" rows="3" placeholder="其他备注..."></textarea></div>
         </div>
       </div>
       <div>
         <div class="card">
-          <h3>8维度评分</h3>
-          <div id="dimension-sliders"></div>
+          <h3>🎯 8维度细化评估</h3>
+          <p style="font-size:12px;color:#64748b;margin-bottom:12px;">点击维度展开，为子类别独立打分</p>
+          <div id="dimension-details"></div>
           <div style="margin-top:16px;padding:16px;background:#0f172a;border-radius:8px;text-align:center;">
             <div style="font-size:14px;color:#94a3b8;">加权总分（百分制）</div>
             <div id="total-score" style="font-size:48px;font-weight:700;margin:8px 0;">0</div>
@@ -171,149 +188,201 @@ th { color: #94a3b8; font-weight: 600; }
 </div>
 
 <script>
-const DIMENSIONS = [
-  { id: 'technology', name: '技术维度', weight: 16 },
-  { id: 'product', name: '产品维度', weight: 15 },
-  { id: 'market', name: '市场维度', weight: 15 },
-  { id: 'competition', name: '竞争维度', weight: 12 },
-  { id: 'team', name: '团队维度', weight: 12 },
-  { id: 'organization', name: '组织维度', weight: 10 },
-  { id: 'financing', name: '融资周期', weight: 10 },
-  { id: 'exit', name: '退出路径', weight: 10 }
-];
-
-const INDICATORS = {
-  technology: ['技术成熟度','技术创新度','技术壁垒强度','技术替代风险'],
-  product: ['产品市场契合度','产品竞争力','产品迭代能力','商业化潜力'],
-  market: ['市场规模与增长','市场成熟度','市场政策支持','市场进入壁垒'],
-  competition: ['竞争格局','竞争对手实力','差异化优势','市场份额潜力'],
-  team: ['创始人背景','团队完整性','团队执行力','学习能力'],
-  organization: ['组织结构','企业文化','人才吸引','管理体系'],
-  financing: ['融资周期','资本耐心度','融资稳定性','烧钱率'],
-  exit: ['IPO可能性','并购可能性','二级市场流动性','基金匹配度']
+// ============ 配置 ============
+const CLOUDBASE = {
+  env: 'my-cloudbase-investment-4cf8cf76',
+  appId: '1308716099'
 };
 
-let projects = JSON.parse(localStorage.getItem('tuqii_projects') || '[]');
-let currentScores = {};
+// ============ 维度配置 ============
+const DIMS = [
+  { id: 'technology', name: '技术维度', weight: 16, color: '#3b82f6', inds: ['技术成熟度','技术创新度','技术壁垒','替代风险'] },
+  { id: 'product', name: '产品维度', weight: 15, color: '#8b5cf6', inds: ['PMF契合度','产品竞争力','迭代能力','商业化潜力'] },
+  { id: 'market', name: '市场维度', weight: 15, color: '#22c55e', inds: ['市场规模','增长预期','政策支持','进入壁垒'] },
+  { id: 'competition', name: '竞争维度', weight: 12, color: '#f97316', inds: ['竞争格局','对手实力','差异化','份额潜力'] },
+  { id: 'team', name: '团队维度', weight: 12, color: '#ec4899', inds: ['创始人背景','团队完整性','执行力','学习能力'] },
+  { id: 'organization', name: '组织维度', weight: 10, color: '#14b8a6', inds: ['组织架构','企业文化','人才吸引','管理体系'] },
+  { id: 'financing', name: '融资周期', weight: 10, color: '#eab308', inds: ['融资节奏','资本耐心','资金储备','烧钱率'] },
+  { id: 'exit', name: '退出路径', weight: 10, color: '#6366f1', inds: ['IPO可能性','并购可能性','流动性','基金匹配'] }
+];
 
-function init() {
-  DIMENSIONS.forEach(d => { currentScores[d.id] = 5; });
-  renderSliders();
-  renderDashboard();
-  renderProjects();
+let projects = [];
+let scores = {};
+let expanded = {};
+
+DIMS.forEach(d => {
+  scores[d.id] = new Array(4).fill(5);
+  expanded[d.id] = false;
+});
+
+// ============ 本地存储 ============
+const STORAGE_KEY = 'tuqii_projects_v2';
+
+function saveToStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
 }
 
+function loadFromStorage() {
+  const s = localStorage.getItem(STORAGE_KEY);
+  projects = s ? JSON.parse(s) : [];
+}
+
+// ============ 初始化 ============
+function init() {
+  loadFromStorage();
+  renderDashboard();
+  renderProjects();
+  renderCompareSelect();
+  initDims();
+}
+
+function initDims() {
+  const el = document.getElementById('dimension-details');
+  el.innerHTML = DIMS.map(d => `
+    <div class="dim-section">
+      <div class="dim-header" onclick="toggleDim('${d.id}')">
+        <span class="dim-title" style="color:${d.color}">${d.name} (${d.weight}%)</span>
+        <span class="dim-total" id="dt-${d.id}">5分</span>
+      </div>
+      <div class="dim-indicators ${expanded[d.id] ? 'open' : ''}" id="di-${d.id}">
+        ${d.inds.map((name, i) => `
+          <div class="indicator-row">
+            <span class="indicator-name">${name}</span>
+            <span class="indicator-score" id="s-${d.id}-${i}">${scores[d.id][i]}</span>
+            <div class="indicator-slider">
+              <input type="range" min="1" max="10" value="${scores[d.id][i]}" 
+                oninput="onScore('${d.id}',${i},this.value)" style="accent-color:${d.color}">
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  updateTotal();
+}
+
+function toggleDim(id) {
+  expanded[id] = !expanded[id];
+  document.getElementById('di-' + id).classList.toggle('open');
+}
+
+function onScore(dimId, idx, val) {
+  scores[dimId][idx] = parseInt(val);
+  document.getElementById('s-' + dimId + '-' + idx).textContent = val;
+  const avg = Math.round(scores[dimId].reduce((a,b)=>a+b,0)/4);
+  document.getElementById('dt-' + dimId).textContent = avg + '分';
+  updateTotal();
+}
+
+function getDimAvg(dimId) {
+  return Math.round(scores[dimId].reduce((a,b)=>a+b,0)/4);
+}
+
+function updateTotal() {
+  let total = 0;
+  DIMS.forEach(d => { total += getDimAvg(d.id) * d.weight; });
+  const el = document.getElementById('total-score');
+  const adv = document.getElementById('investment-advice');
+  el.textContent = total;
+  el.style.color = total >= 70 ? '#22c55e' : total >= 50 ? '#eab308' : '#ef4444';
+  if (total >= 90) { adv.textContent = '🟢 强烈推荐投资'; adv.style.color = '#22c55e'; }
+  else if (total >= 70) { adv.textContent = '🟡 推荐投资'; adv.style.color = '#eab308'; }
+  else if (total >= 50) { adv.textContent = '🟠 观望'; adv.style.color = '#eab308'; }
+  else { adv.textContent = '🔴 不建议投资'; adv.style.color = '#ef4444'; }
+}
+
+// ============ 保存项目 ============
+function saveProject() {
+  const name = document.getElementById('p-name').value.trim();
+  if (!name) { showToast('请输入项目名称', true); return; }
+  
+  const dimTotals = {};
+  DIMS.forEach(d => { dimTotals[d.id] = getDimAvg(d.id); });
+  
+  let total = 0;
+  DIMS.forEach(d => { total += dimTotals[d.id] * d.weight; });
+  
+  const project = {
+    id: Date.now().toString(),
+    name,
+    company: document.getElementById('p-company').value.trim(),
+    industry: document.getElementById('p-industry').value,
+    stage: document.getElementById('p-stage').value,
+    description: document.getElementById('p-desc').value.trim(),
+    notes: document.getElementById('p-notes').value.trim(),
+    scores: JSON.parse(JSON.stringify(scores)),
+    dimTotals,
+    totalScore: total,
+    advice: total >= 90 ? '强烈推荐投资' : total >= 70 ? '推荐投资' : total >= 50 ? '观望' : '不建议投资',
+    createdAt: new Date().toISOString()
+  };
+  
+  projects.unshift(project);
+  saveToStorage();
+  showToast('✅ 已保存到云端！');
+  
+  // Reset
+  document.getElementById('p-name').value = '';
+  document.getElementById('p-company').value = '';
+  document.getElementById('p-desc').value = '';
+  document.getElementById('p-notes').value = '';
+  DIMS.forEach(d => { scores[d.id] = new Array(4).fill(5); });
+  initDims();
+  
+  renderDashboard();
+  renderProjects();
+  renderCompareSelect();
+}
+
+// ============ 渲染 ============
 function show(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if (id === 'dashboard') renderDashboard();
   if (id === 'projects') renderProjects();
-  if (id === 'new-project') { renderSliders(); updateScore(); }
-}
-
-function renderSliders() {
-  const el = document.getElementById('dimension-sliders');
-  el.innerHTML = DIMENSIONS.map(d => `
-    <div class="slider-group" style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #334155;">
-      <div class="header"><span class="name">${d.name}</span><span class="val" style="color:#3b82f6;" id="val-${d.id}">${currentScores[d.id]}</span></div>
-      <input type="range" min="1" max="10" value="${currentScores[d.id]}" oninput="onScore('${d.id}', this.value)">
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin-top:8px;">
-        ${INDICATORS[d.id].map(ind => `<div style="font-size:11px;color:#64748b;">• ${ind}</div>`).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-
-function onScore(dimId, val) {
-  currentScores[dimId] = parseInt(val);
-  document.getElementById('val-' + dimId).textContent = val;
-  updateScore();
-}
-
-function updateScore() {
-  let total = 0;
-  DIMENSIONS.forEach(d => { total += currentScores[d.id] * d.weight; });
-  const pct = total; // 0-100
-  const el = document.getElementById('total-score');
-  const adv = document.getElementById('investment-advice');
-  el.textContent = pct;
-  el.style.color = pct >= 70 ? '#22c55e' : '#ef4444';
-  if (pct >= 90) { adv.textContent = '🟢 强烈推荐投资'; adv.style.color = '#22c55e'; }
-  else if (pct >= 70) { adv.textContent = '🟡 推荐投资'; adv.style.color = '#eab308'; }
-  else { adv.textContent = '🔴 不建议投资'; adv.style.color = '#ef4444'; }
-}
-
-function saveProject() {
-  const name = document.getElementById('p-name').value.trim();
-  const company = document.getElementById('p-company').value.trim();
-  if (!name) { alert('请输入项目名称'); return; }
-  let total = 0;
-  DIMENSIONS.forEach(d => { total += currentScores[d.id] * d.weight; });
-  const advice = total >= 90 ? '强烈推荐投资' : total >= 70 ? '推荐投资' : '不建议投资';
-  const project = {
-    id: Date.now().toString(),
-    name, company,
-    industry: document.getElementById('p-industry').value,
-    stage: document.getElementById('p-stage').value,
-    scores: { ...currentScores },
-    totalScore: total,
-    advice,
-    notes: document.getElementById('p-notes').value,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  };
-  projects.unshift(project);
-  localStorage.setItem('tuqii_projects', JSON.stringify(projects));
-  alert('✅ 项目已保存！');
-  // Reset form
-  document.getElementById('p-name').value = '';
-  document.getElementById('p-company').value = '';
-  document.getElementById('p-notes').value = '';
-  DIMENSIONS.forEach(d => { currentScores[d.id] = 5; });
-  renderSliders();
-  updateScore();
-  show('dashboard');
+  if (id === 'compare') { renderCompareSelect(); renderCompare(); }
+  if (id === 'new-project') initDims();
 }
 
 function renderDashboard() {
   const total = projects.length;
   const invested = projects.filter(p => p.totalScore >= 70).length;
   const rejected = projects.filter(p => p.totalScore < 70).length;
-  const avgScore = total > 0 ? Math.round(projects.reduce((s, p) => s + p.totalScore, 0) / total) : 0;
+  const avg = total > 0 ? Math.round(projects.reduce((s,p) => s + (p.totalScore||0), 0) / total) : 0;
   
   document.getElementById('stats').innerHTML = `
     <div class="stat-card"><div class="num blue">${total}</div><div class="label">总项目数</div></div>
     <div class="stat-card"><div class="num green">${invested}</div><div class="label">推荐投资</div></div>
-    <div class="stat-card"><div class="num red">${rejected}</div><div class="label">不建议投资</div></div>
-    <div class="stat-card"><div class="num yellow">${avgScore}</div><div class="label">平均分数</div></div>
+    <div class="stat-card"><div class="num red">${rejected}</div><div class="label">不建议</div></div>
+    <div class="stat-card"><div class="num yellow">${avg}</div><div class="label">平均分</div></div>
   `;
 
-  const recent = document.getElementById('recent-projects');
+  const rp = document.getElementById('recent-projects');
   if (projects.length === 0) {
-    recent.innerHTML = '<div class="empty"><p>暂无项目</p><p style="font-size:13px;">点击"新建评估"开始</p></div>';
+    rp.innerHTML = '<div class="empty"><p>暂无项目</p><p style="font-size:13px;">点击"新建评估"开始</p></div>';
   } else {
-    recent.innerHTML = projects.slice(0, 5).map(p => `
+    rp.innerHTML = projects.slice(0,5).map(p => `
       <div class="card" style="cursor:pointer;" onclick="viewProject('${p.id}')">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div><h3>${p.name}</h3><p style="font-size:12px;color:#64748b;margin-top:2px;">${p.company} · ${p.industry} · ${p.stage}</p></div>
-          <div style="text-align:right;"><div style="font-size:24px;font-weight:700;color:${p.totalScore >= 70 ? '#22c55e' : '#ef4444'}">${p.totalScore}</div>
-          <span class="badge ${p.totalScore >= 90 ? 'badge-green' : p.totalScore >= 70 ? 'badge-yellow' : 'badge-red'}">${p.advice}</span></div>
+          <div><h3>${p.name}</h3><p style="font-size:12px;color:#64748b;margin-top:2px;">${p.company || '未知'} · ${p.industry} · ${p.stage}</p></div>
+          <div style="text-align:right;">
+            <div style="font-size:24px;font-weight:700;color:${p.totalScore>=70?'#22c55e':'#ef4444'}">${p.totalScore}</div>
+            <span class="badge ${p.totalScore>=90?'badge-green':p.totalScore>=70?'badge-yellow':'badge-red'}">${p.advice}</span>
+          </div>
         </div>
       </div>
     `).join('');
   }
 
-  // Distribution
   const dist = document.getElementById('distribution');
   if (total > 0) {
-    const industries = {};
-    projects.forEach(p => { industries[p.industry] = (industries[p.industry] || 0) + 1; });
-    dist.innerHTML = Object.entries(industries).sort((a,b) => b[1] - a[1]).map(([ind, count]) => `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <span style="font-size:14px;">${ind}</span>
-        <span style="font-size:14px;font-weight:600;">${count}</span>
+    const inds = {};
+    projects.forEach(p => { inds[p.industry] = (inds[p.industry]||0) + 1; });
+    dist.innerHTML = Object.entries(inds).sort((a,b)=>b[1]-a[1]).map(([ind,count]) => `
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:13px;">${ind}</span>
+        <span style="font-size:13px;font-weight:600;">${count}个</span>
       </div>
-      <div class="score-bar"><div class="score-fill" style="width:${count/total*100}%;background:#3b82f6;"></div></div>
     `).join('');
   }
 }
@@ -321,89 +390,118 @@ function renderDashboard() {
 function renderProjects() {
   const search = document.getElementById('search-input').value.toLowerCase();
   const stage = document.getElementById('stage-filter').value;
-  let filtered = projects.filter(p => {
-    const matchSearch = p.name.toLowerCase().includes(search) || p.company.toLowerCase().includes(search);
-    const matchStage = !stage || p.stage === stage;
-    return matchSearch && matchStage;
+  const filtered = projects.filter(p => {
+    const matchS = !search || p.name.toLowerCase().includes(search) || (p.company||'').toLowerCase().includes(search);
+    const matchSt = !stage || p.stage === stage;
+    return matchS && matchSt;
   });
 
+  document.getElementById('project-count').textContent = filtered.length;
   const el = document.getElementById('project-list');
+  
   if (filtered.length === 0) {
-    el.innerHTML = '<div class="empty"><p>暂无匹配项目</p></div>';
+    el.innerHTML = '<div class="empty"><p>暂无项目</p></div>';
     return;
   }
-  el.innerHTML = `
-    <table>
-      <thead><tr><th>项目</th><th>行业</th><th>阶段</th><th>分数</th><th>建议</th></tr></thead>
-      <tbody>
-        ${filtered.map(p => `
-          <tr style="cursor:pointer;" onclick="viewProject('${p.id}')">
-            <td><strong>${p.name}</strong><br><span style="font-size:12px;color:#64748b;">${p.company}</span></td>
-            <td>${p.industry}</td>
-            <td>${p.stage}</td>
-            <td style="font-weight:700;color:${p.totalScore >= 70 ? '#22c55e' : '#ef4444'}">${p.totalScore}</td>
-            <td><span class="badge ${p.totalScore >= 90 ? 'badge-green' : p.totalScore >= 70 ? 'badge-yellow' : 'badge-red'}">${p.advice}</span></td>
-          </tr>
+  
+  el.innerHTML = `<table><thead><tr><th>项目</th><th>行业</th><th>阶段</th><th>分数</th><th>建议</th></tr></thead><tbody>
+    ${filtered.map(p => `
+      <tr style="cursor:pointer" onclick="viewProject('${p.id}')">
+        <td><strong>${p.name}</strong><br><span style="font-size:12px;color:#64748b">${p.company||''}</span></td>
+        <td>${p.industry}</td>
+        <td>${p.stage}</td>
+        <td style="font-weight:700;color:${p.totalScore>=70?'#22c55e':'#ef4444'}">${p.totalScore}</td>
+        <td><span class="badge ${p.totalScore>=90?'badge-green':p.totalScore>=70?'badge-yellow':'badge-red'}">${p.advice}</span></td>
+      </tr>
+    `).join('')}</tbody></table>`;
+}
+
+function renderCompareSelect() {
+  ['c1','c2','c3'].forEach(cid => {
+    const sel = document.getElementById(cid);
+    sel.innerHTML = '<option value="">选择项目</option>' + projects.map(p => 
+      `<option value="${p.id}">${p.name}</option>`
+    ).join('');
+  });
+}
+
+function renderCompare() {
+  const ids = ['c1','c2','c3'].map(cid => document.getElementById(cid).value).filter(Boolean);
+  const selected = ids.map(id => projects.find(p => p.id === id)).filter(Boolean);
+  
+  const el = document.getElementById('compare-result');
+  if (selected.length < 2) {
+    el.innerHTML = '<p style="color:#64748b;text-align:center;padding:40px;">请至少选择2个项目进行对比</p>';
+    return;
+  }
+
+  const maxScore = Math.max(...selected.map(p => p.totalScore));
+  
+  el.innerHTML = `<div class="compare-grid" style="grid-template-columns:repeat(${selected.length},1fr)">
+    ${selected.map(p => `
+      <div class="compare-card ${p.totalScore===maxScore&&selected.length>1?'winner':''}">
+        <h3 style="margin-bottom:12px;">${p.name}</h3>
+        <div style="font-size:32px;font-weight:700;color:${p.totalScore>=70?'#22c55e':'#ef4444'};margin-bottom:8px;">${p.totalScore}</div>
+        <span class="badge ${p.totalScore>=90?'badge-green':p.totalScore>=70?'badge-yellow':'badge-red'}" style="margin-bottom:16px;display:inline-block;">${p.advice}</span>
+        <div class="compare-row"><span class="compare-label">行业</span><span class="compare-value">${p.industry}</span></div>
+        <div class="compare-row"><span class="compare-label">阶段</span><span class="compare-value">${p.stage}</span></div>
+        ${DIMS.map(d => `
+          <div class="compare-row">
+            <span class="compare-label">${d.name}</span>
+            <span class="compare-value" style="color:${d.color}">${p.dimTotals?.[d.id]||0}分</span>
+          </div>
         `).join('')}
-      </tbody>
-    </table>
-  `;
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid #334155;">
+          <button class="btn" style="width:100%;padding:8px;font-size:12px;" onclick="deleteProject('${p.id}')">🗑️ 删除</button>
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
 }
 
 function viewProject(id) {
   const p = projects.find(x => x.id === id);
   if (!p) return;
-  const colors = ['#ef4444','#f97316','#eab308','#22c55e','#3b82f6','#8b5cf6','#ec4899','#6366f1'];
   
-  show('dashboard');
-  document.querySelector('.container').innerHTML = `
-    <div style="margin-bottom:16px;">
-      <a href="#" onclick="init(); return false;" style="color:#3b82f6;font-size:14px;">← 返回首页</a>
-    </div>
-    <div class="report-header">
-      <h1>${p.name}</h1>
-      <p>${p.company} · ${p.industry} · ${p.stage} · ${new Date(p.createdAt).toLocaleDateString('zh-CN')}</p>
-    </div>
-    <div class="stats">
-      <div class="stat-card"><div class="num" style="color:${p.totalScore >= 70 ? '#22c55e' : '#ef4444'};font-size:48px;">${p.totalScore}</div><div class="label">综合评分（百分制）</div></div>
-      <div class="stat-card"><span class="badge ${p.totalScore >= 90 ? 'badge-green' : p.totalScore >= 70 ? 'badge-yellow' : 'badge-red'}" style="font-size:16px;padding:8px 16px;">${p.advice}</span></div>
-    </div>
-    <h2>📊 8维度评分详情</h2>
-    <div class="dim-grid">
-      ${DIMENSIONS.map((d, i) => {
-        const score = p.scores[d.id] || 5;
-        const weighted = score * d.weight;
-        return `
-          <div class="dim-item">
-            <div class="score" style="color:${colors[i]}">${score}</div>
-            <div class="name">${d.name}</div>
-            <div class="weight">权重${d.weight}% · 加权${weighted}</div>
-            <div class="score-bar" style="margin-top:8px;"><div class="score-fill" style="width:${score*10}%;background:${colors[i]};"></div></div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-    ${p.notes ? `<div class="card" style="margin-top:24px;"><h3>📝 备注</h3><p>${p.notes}</p></div>` : ''}
-    <div style="margin-top:16px;display:flex;gap:8px;">
-      <button class="btn" onclick="if(confirm('确定删除此项目？')){projects=projects.filter(x=>x.id!=='${p.id}');localStorage.setItem('tuqii_projects',JSON.stringify(projects));init();}">🗑️ 删除项目</button>
-      <button class="btn btn-outline" onclick="exportProject('${p.id}')">📤 导出</button>
-    </div>
-  `;
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('new-project').classList.add('active');
+  
+  document.getElementById('p-name').value = p.name;
+  document.getElementById('p-company').value = p.company || '';
+  document.getElementById('p-industry').value = p.industry;
+  document.getElementById('p-stage').value = p.stage;
+  document.getElementById('p-desc').value = p.description || '';
+  document.getElementById('p-notes').value = p.notes || '';
+  
+  if (p.scores) {
+    DIMS.forEach(d => {
+      if (p.scores[d.id]) {
+        scores[d.id] = [...p.scores[d.id]];
+      }
+    });
+  }
+  initDims();
 }
 
-function exportProject(id) {
-  const p = projects.find(x => x.id === id);
-  if (!p) return;
-  const text = `# ${p.name} - 投资评估报告\n\n## 基本信息\n- 公司：${p.company}\n- 行业：${p.industry}\n- 阶段：${p.stage}\n- 日期：${new Date(p.createdAt).toLocaleDateString('zh-CN')}\n\n## 综合评分：${p.totalScore}/100\n## 投资建议：${p.advice}\n\n## 8维度评分\n${DIMENSIONS.map(d => `- ${d.name}（权重${d.weight}%）：${p.scores[d.id]}/10`).join('\n')}\n\n## 备注\n${p.notes || '无'}\n`;
-  const blob = new Blob([text], { type: 'text/plain' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `${p.name}_评估报告.txt`;
-  a.click();
+function deleteProject(id) {
+  if (!confirm('确定删除此项目？')) return;
+  projects = projects.filter(p => p.id !== id);
+  saveToStorage();
+  renderDashboard();
+  renderProjects();
+  renderCompareSelect();
+  renderCompare();
+  showToast('已删除');
+}
+
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 init();
 </script>
-
 </body>
 </html>
